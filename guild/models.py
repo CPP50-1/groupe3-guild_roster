@@ -85,9 +85,11 @@ class Character:
 
     def __eq__(self, other: object) -> bool:
         """
-        concrete type, AND have the same name AND the same level.
+        This will compare if two objects have the same concrete type, same name AND the same level.
         """
-        return isinstance(other, Character) and self.name == other.name and self.level == other.level
+        if isinstance(other, Character):
+            return type(other)==type(self) and self.name == other.name and self.level == other.level
+        return False
 
     def __hash__(self) -> int:
         """TODO (Day 1): must stay consistent with __eq__ above."""
