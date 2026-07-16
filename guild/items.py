@@ -7,6 +7,7 @@ Rarity and __init__ are given. Your job is the dunder methods below.
 Remember the pairing rule: __eq__ and __hash__ must always be defined
 together and stay consistent, or Item becomes unusable in sets/dicts.
 """
+
 from __future__ import annotations
 
 from functools import total_ordering
@@ -17,6 +18,7 @@ class Rarity(IntEnum):
     """IntEnum so rarities compare naturally (COMMON < RARE < LEGENDARY)
     without any extra work — this is used by Item.__lt__ below.
     """
+
     COMMON = 1
     UNCOMMON = 2
     RARE = 3
@@ -59,19 +61,15 @@ class Item:
         raise NotImplementedError("TODO (Day 1): implement __eq__")
 
     def __hash__(self) -> int:
-        """TODO (Day 1): must stay consistent with __eq__ above — equal
-        Items must hash equal, or sets/dicts of Item will misbehave.
-        """
-        raise NotImplementedError("TODO (Day 1): implement __hash__")
+        """Must stay consistent with __eq__."""
+        return hash((self.name, self.rarity, self.value))
 
     def __lt__(self, other: object) -> bool:
-        """TODO (Day 1): order by rarity first, then value as a tiebreaker.
-        Return NotImplemented if `other` isn't an Item.
-        """
-        raise NotImplementedError("TODO (Day 1): implement __lt__")
+        """Order by rarity first, then value."""
+        if not isinstance(other, Item):
+            return NotImplemented
+        return (self.rarity, self.value) < (other.rarity, other.value)
 
     def __bool__(self) -> bool:
-        """TODO (Day 1): an Item is "truthy" if it has any value at all —
-        a zero-value junk item should be falsy.
-        """
-        raise NotImplementedError("TODO (Day 1): implement __bool__")
+        """Truthy if the item has any value."""
+        return self.value != 0
