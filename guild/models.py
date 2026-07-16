@@ -74,20 +74,20 @@ class Character:
         """This will return a reconstructable string version of the Character
         Warrior(name='Grom', level=2, hp=30)
         """
-        return f"{self.describe_role()}(name={self.name!r}, level={self.level}, hp={self.hp})"
+        return f"{type(self).__name__}(name={self.name!r}, level={self.level}, hp={self.hp})"
 
 
     def __str__(self) -> str:
         """This return an user-friendly string representation of the character.
         Grom the Warrior (Lv.2, 30 HP)
         """
-        return f"{self.name} the {self.describe_role()} (Lv.{self.level}, {self.hp} HP)"
+        return f"{self.name} the {type(self).__name__} (Lv.{self.level}, {self.hp} HP)"
 
     def __eq__(self, other: object) -> bool:
         """
         This will compare if two objects have the same concrete type, same name AND the same level.
         """
-        if isinstance(other, Character):
+        if isinstance(other, Character):        # Ensures we are comparing Characters
             return type(other)==type(self) and self.name == other.name and self.level == other.level
         return False
 
