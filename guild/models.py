@@ -71,22 +71,23 @@ class Character:
     # --- Day 1 dunder set -------------------------------------------------
 
     def __repr__(self) -> str:
-        """TODO (Day 1): should look like
+        """This will return a reconstructable string version of the Character
         Warrior(name='Grom', level=2, hp=30)
         """
-        raise NotImplementedError("TODO (Day 1): implement Character.__repr__")
+        return f"{self.describe_role()}(name={self.name!r}, level={self.level}, hp={self.hp})"
+
 
     def __str__(self) -> str:
-        """TODO (Day 1): should look like
+        """This return an user-friendly string representation of the character.
         Grom the Warrior (Lv.2, 30 HP)
         """
-        raise NotImplementedError("TODO (Day 1): implement Character.__str__")
+        return f"{self.name} the {self.describe_role()} (Lv.{self.level}, {self.hp} HP)"
 
     def __eq__(self, other: object) -> bool:
-        """TODO (Day 1): two Characters are equal when they're the same
+        """
         concrete type, AND have the same name AND the same level.
         """
-        raise NotImplementedError("TODO (Day 1): implement Character.__eq__")
+        return isinstance(other, Character) and self.name == other.name and self.level == other.level
 
     def __hash__(self) -> int:
         """TODO (Day 1): must stay consistent with __eq__ above."""
