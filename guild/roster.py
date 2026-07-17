@@ -137,7 +137,7 @@ class Roster:
         raise NotImplementedError("TODO (Day 2): implement what to do if index is out of range.")
 
     def __contains__(self, item: Character) -> bool:
-        raise NotImplementedError("TODO (Day 2): implement Roster.__contains__")
+        return item in self._characters
 
     def __len__(self) -> int:
         return len(self._characters)
