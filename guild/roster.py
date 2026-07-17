@@ -150,7 +150,8 @@ class Roster:
         raise NotImplementedError("TODO (Day 2): implement Roster.__iter__")
 
     def __repr__(self) -> str:
-        raise NotImplementedError("TODO (Day 2): implement Roster.__repr__")
+        return f"{type(self).__name__}(characters={self._characters})"
+
 
     def add(self, character: Character) -> None:
         raise NotImplementedError("TODO (Day 2): implement Roster.add")
