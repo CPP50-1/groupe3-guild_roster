@@ -148,7 +148,6 @@ class Roster:
     def __repr__(self) -> str:
         return f"{type(self).__name__}(characters={self._characters})"
 
-
     def add(self, character: Character) -> None:
         self._characters.append(character)
 
@@ -157,9 +156,5 @@ class Roster:
             if character.hp > 0:
                 yield character
 
-
     def sorted_by_level(self) -> List[Character]:
-        """TODO (Day 2): return characters sorted by level. Should need
-        no key= argument at all if Character.__lt__ (Day 1) is correct.
-        """
-        raise NotImplementedError("TODO (Day 2): implement Roster.sorted_by_level")
+        return sorted(self._characters)
