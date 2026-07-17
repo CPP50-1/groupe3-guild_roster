@@ -154,7 +154,7 @@ class Roster:
 
 
     def add(self, character: Character) -> None:
-        raise NotImplementedError("TODO (Day 2): implement Roster.add")
+        self._characters.append(character)
 
     def alive_characters(self) -> Iterator[Character]:
         """TODO (Day 2): a generator (use `yield`) that yields only the
