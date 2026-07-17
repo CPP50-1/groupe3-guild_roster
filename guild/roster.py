@@ -9,6 +9,7 @@
 Constructors that just store their arguments are given; the actual
 protocol methods are TODOs.
 """
+
 from __future__ import annotations
 
 from typing import Any, Dict, Iterator, List
@@ -17,6 +18,7 @@ from .models import Character
 
 
 # --- Dev A: OrderedSet ------------------------------------------------------
+
 
 class OrderedSet:
     """A set that remembers insertion order. Backed by a dict (Python 3.7+
@@ -59,6 +61,7 @@ class OrderedSet:
 
 # --- Dev B: memoized callable ------------------------------------------------
 
+
 class StatCalculator:
     """A callable object that caches results by argument, for an
     expensive/derived stat computation.
@@ -70,18 +73,21 @@ class StatCalculator:
         self.cache_hits = 0
 
     def __call__(self, character: Character, difficulty: int) -> int:
-        """TODO (Day 2): build a cache key from (type name, level,
-        difficulty). If it's already in self._cache, increment
-        self.cache_hits and return the cached value. Otherwise compute a
-        result (any deterministic formula is fine — e.g.
-        (character.level * 7 + difficulty * 13) % 100), store it in the
-        cache, and return it. Increment self.calls every time this is
-        called, regardless of hit or miss.
-        """
-        raise NotImplementedError("TODO (Day 2): implement StatCalculator.__call__")
+        self.calls += 1
+
+        key = (type(character).__name__, character.level, difficulty)
+
+        if key in self._cache:
+            self.cache_hits += 1
+            return self._cache[key]
+
+        result = (character.level * 7 + difficulty * 13) % 100
+        self._cache[key] = result
+        return result
 
 
 # --- Dev C: full container protocol + iterator protocol from scratch -------
+
 
 class RosterIterator:
     """A standalone iterator object for Roster, built from scratch rather
