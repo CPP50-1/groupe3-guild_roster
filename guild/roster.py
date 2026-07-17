@@ -157,13 +157,10 @@ class Roster:
         self._characters.append(character)
 
     def alive_characters(self) -> Iterator[Character]:
-        """TODO (Day 2): a generator (use `yield`) that yields only the
-        characters that are currently "truthy" (relies on Character's
-        __bool__ from Day 1). Compare, once done, how much shorter this
-        is than RosterIterator above — same protocol, very different
-        amount of code.
-        """
-        raise NotImplementedError("TODO (Day 2): implement Roster.alive_characters")
+        for character in self._characters:
+            if character.hp > 0:
+                yield character
+
 
     def sorted_by_level(self) -> List[Character]:
         """TODO (Day 2): return characters sorted by level. Should need
