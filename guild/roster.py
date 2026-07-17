@@ -114,11 +114,21 @@ class Roster:
         self._characters: List[Character] = list(characters)
 
     def __getitem__(self, index: int) -> Character:
-        raise NotImplementedError("TODO (Day 2): implement Roster.__getitem__")
+        if 0<= index < len(self._characters):
+            return self._characters[index]
+
+        raise NotImplementedError("TODO (Day 2): implement what to do if index is out of range.")
 
     def __setitem__(self, index: int, value: Character) -> None:
         """TODO (Day 2): reject non-Character values with a TypeError."""
-        raise NotImplementedError("TODO (Day 2): implement Roster.__setitem__")
+        if not isinstance(value, Character):
+            raise TypeError("Wrong type for Roster.__setitem__. 'value' should be a Character.")
+
+        if 0 <= index < len(self._characters):
+            self._characters[index] = value
+            return
+
+        raise NotImplementedError("TODO (Day 2): implement what to do if index is out of range.")
 
     def __delitem__(self, index: int) -> None:
         raise NotImplementedError("TODO (Day 2): implement Roster.__delitem__")
@@ -127,7 +137,7 @@ class Roster:
         raise NotImplementedError("TODO (Day 2): implement Roster.__contains__")
 
     def __len__(self) -> int:
-        raise NotImplementedError("TODO (Day 2): implement Roster.__len__")
+        return len(self._characters)
 
     def __iter__(self) -> RosterIterator:
         """TODO (Day 2): return a RosterIterator over this roster's
