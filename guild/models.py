@@ -89,18 +89,16 @@ class Character:
         raise NotImplementedError("TODO (Day 1): implement Character.__eq__")
 
     def __hash__(self) -> int:
-        """TODO (Day 1): must stay consistent with __eq__ above."""
-        raise NotImplementedError("TODO (Day 1): implement Character.__hash__")
+        return hash((self.name, self.hp, self.level))
 
     def __lt__(self, other: object) -> bool:
-        """TODO (Day 1): order by level — this is what lets a Roster
-        (Day 2) be sorted() directly with no key= needed.
-        """
-        raise NotImplementedError("TODO (Day 1): implement Character.__lt__")
+        if not isinstance(other, Character):
+            return NotImplemented
+        else:
+            return self.level < other.level
 
     def __bool__(self) -> bool:
-        """TODO (Day 1): a character is "truthy" while alive (hp > 0)."""
-        raise NotImplementedError("TODO (Day 1): implement Character.__bool__")
+        return self.hp > 0
 
 
 class Warrior(Character):

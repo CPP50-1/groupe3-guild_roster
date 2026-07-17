@@ -39,24 +39,16 @@ class Item:
         self.value = value
 
     def __repr__(self) -> str:
-        """TODO (Day 1): an unambiguous, reconstructable representation —
-        should look like: Item(name='Iron Sword', rarity=COMMON, value=10)
-        """
-        raise NotImplementedError("TODO (Day 1): implement __repr__")
+        return f"Item(name='{self.name}', rarity={self.rarity}, value={self.value})"
 
     def __str__(self) -> str:
-        """TODO (Day 1): a human-readable line — should look like:
-        Iron Sword (Common, 10g)
-        Think about why this differs from __repr__ and when each is used.
-        """
-        raise NotImplementedError("TODO (Day 1): implement __str__")
+        return f"{self.name} ({self.rarity.title()}, {self.value}g)"
 
     def __eq__(self, other: object) -> bool:
-        """TODO (Day 1): two Items are equal when name, rarity AND value
-        all match. Remember to return NotImplemented (not False) if
-        `other` isn't an Item.
-        """
-        raise NotImplementedError("TODO (Day 1): implement __eq__")
+        if not isinstance(other, Item):
+            return NotImplemented
+        else:
+            return self.name == other.name and self.rarity == other.rarity and self.value == other.value
 
     def __hash__(self) -> int:
         """TODO (Day 1): must stay consistent with __eq__ above — equal
