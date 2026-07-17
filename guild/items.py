@@ -39,10 +39,10 @@ class Item:
         self.value = value
 
     def __repr__(self) -> str:
-        return f"Item(name='{self.name}', rarity={self.rarity}, value={self.value})"
+        return f"Item(name='{self.name}', rarity={self.rarity.name}, value={self.value})"
 
     def __str__(self) -> str:
-        return f"{self.name} ({self.rarity.title()}, {self.value}g)"
+        return f"{self.name} ({self.rarity.name.title()}, {self.value}g)"
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Item):
