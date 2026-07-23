@@ -7,7 +7,6 @@ Rarity and __init__ are given. Your job is the dunder methods below.
 Remember the pairing rule: __eq__ and __hash__ must always be defined
 together and stay consistent, or Item becomes unusable in sets/dicts.
 """
-
 from __future__ import annotations
 
 from functools import total_ordering
@@ -18,7 +17,6 @@ class Rarity(IntEnum):
     """IntEnum so rarities compare naturally (COMMON < RARE < LEGENDARY)
     without any extra work — this is used by Item.__lt__ below.
     """
-
     COMMON = 1
     UNCOMMON = 2
     RARE = 3
@@ -41,24 +39,16 @@ class Item:
         self.value = value
 
     def __repr__(self) -> str:
-        """TODO (Day 1): an unambiguous, reconstructable representation —
-        should look like: Item(name='Iron Sword', rarity=COMMON, value=10)
-        """
-        raise NotImplementedError("TODO (Day 1): implement __repr__")
+        return f"Item(name='{self.name}', rarity={self.rarity.name}, value={self.value})"
 
     def __str__(self) -> str:
-        """TODO (Day 1): a human-readable line — should look like:
-        Iron Sword (Common, 10g)
-        Think about why this differs from __repr__ and when each is used.
-        """
-        raise NotImplementedError("TODO (Day 1): implement __str__")
+        return f"{self.name} ({self.rarity.name.title()}, {self.value}g)"
 
     def __eq__(self, other: object) -> bool:
-        """TODO (Day 1): two Items are equal when name, rarity AND value
-        all match. Remember to return NotImplemented (not False) if
-        `other` isn't an Item.
-        """
-        raise NotImplementedError("TODO (Day 1): implement __eq__")
+        if not isinstance(other, Item):
+            return NotImplemented
+        else:
+            return self.name == other.name and self.rarity == other.rarity and self.value == other.value
 
     def __hash__(self) -> int:
         """Must stay consistent with __eq__."""
