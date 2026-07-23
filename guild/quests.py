@@ -39,8 +39,6 @@ def combined_quest_feed() -> Iterator[Quest]:
     )
 
 
-# --- TODO (Day 3): an infinite source + itertools.islice --------------------
-
 def endless_bounty_quests() -> Iterator[Quest]:
     for i in itertools.count(1):
         yield {
@@ -54,22 +52,19 @@ def first_n_bounties(n: int) -> List[Quest]:
     return list(itertools.islice(endless_bounty_quests(), n))
 
 
-# --- TODO (Day 3): itertools.takewhile ---------------------------------------
-
 def quests_under_budget(quests: Iterable[Quest], budget: int) -> List[Quest]:
-    """TODO: sort `quests` by reward_gold ascending, then use
-    itertools.takewhile to collect quests while reward_gold < budget.
+    sorted_quests = sorted(
+        quests,
+        key=lambda quest: quest["reward_gold"],
+    )
 
-    Think carefully about why the sort has to happen first: takewhile
-    stops at the *first* item that fails the predicate, unlike filter()
-    which checks every item. Skipping the sort would silently produce a
-    wrong (too-short) result rather than an error — worth testing that
-    failure mode yourself once, deliberately, before moving on.
-    """
-    raise NotImplementedError("TODO (Day 3): implement quests_under_budget")
+    return list(
+        itertools.takewhile(
+            lambda quest: quest["reward_gold"] < budget,
+            sorted_quests,
+        )
+    )
 
-
-# --- TODO (Day 3): itertools.groupby -----------------------------------------
 
 def group_roster_by_role(characters: Iterable[Character]) -> Dict[str, List[Character]]:
     sorted_characters = sorted(
@@ -86,12 +81,11 @@ def group_roster_by_role(characters: Iterable[Character]) -> Dict[str, List[Char
     }
 
 
-# --- TODO (Day 3): itertools.product -----------------------------------------
-
 def eligible_assignments(
     characters: Iterable[Character], quests: Iterable[Quest]
 ) -> List[tuple]:
-    """TODO: use itertools.product to build every (character, quest) pair,
-    then filter down to pairs where character.level >= quest["min_level"].
-    """
-    raise NotImplementedError("TODO (Day 3): implement eligible_assignments")
+    return [
+        (character, quest)
+        for character, quest in itertools.product(characters, quests)
+        if character.level >= quest["min_level"]
+    ]
